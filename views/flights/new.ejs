@@ -1,0 +1,28 @@
+<%- include('./partials/header') %>
+    <h2>Enter a New Flight</h2>
+<form action="/flights" method="POST">
+  <label >AIRLINE HEAD:<select name="airline">
+    <option value="American">American</option>
+    <option value="Southwest">Southwest</option>
+    <option value="United">United</option>
+  </select></label ><br />
+  <label>TAIL NUMBER : <input type="text" name="flightNumber" class = 'tail'/> </label><br/>
+  <label>Destination : <select name="departureAirport">
+    <option value="AUS">Austin</option>
+    <option value="DAL">Dallas</option>
+    <option value="LAX">Los Angeles</option>
+    <option value="SEA">Seattle</option>
+</select></label><br/>
+  
+  <label for="meeting-time">Departs on</label>
+
+  <input type="datetime-local" id="meeting-time"
+         name="departure">
+  <br />
+
+  <!-- <label
+    >Delayed?: <input type="checkbox" name="Delay" checked /> </label
+  ><br /> -->
+  <input type="submit" value="update flights" />
+</form>
+<%- include('./partials/footer') %>

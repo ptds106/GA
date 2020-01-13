@@ -1,0 +1,38 @@
+<%- include('./partials/header') %>
+<h1 class="LAX">Welcome to LAX Departings</h1>
+<h2 class="time">
+  Current LAX Time: <%d = new Date().toLocaleString() %> <%=d%>
+</h2>
+<table>
+  <tr>
+    <th class = "delete_flight">Cancel</th>
+    <th>AIRLINE</th>
+    <th>TAIL NUMBER</th>
+    <th>DEPARTURE TIME</th>
+    <th></th>
+  </tr>
+  <%flightsInfo.forEach((t, idx) => { %>
+  <tr id="red">
+    <td class = "delete">
+      <form
+        action="/flights/<%=t._id%>/delete"
+        class="delete-form"
+        method="DELETE"
+      >
+        <button type="submit">X</button>
+      </form>
+    </td>
+    <td><%=t.airline%></td>
+    <td><%=t.flightNumber%></td>
+    <td><%=t.departure%></td>
+    <td><a href="/flights/<%= t._id %>">DETAILS</a></td>
+    <%});%>
+  </tr>
+</table>
+
+<form action="/flights/new">
+  <button class="more">ADD NEW FLIGHTS</button>
+</form>
+<img class = tower src =
+https://i.pinimg.com/originals/ac/a7/95/aca795a97ad2e276b380925062f8ded9.jpg>
+<%- include('./partials/footer') %>

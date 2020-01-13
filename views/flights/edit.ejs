@@ -1,0 +1,48 @@
+<%- include('./partials/header') %>
+
+<table >
+  <tr>
+
+  <th>AIRLINE</th>
+  <th>TAIL NUMBER</th> 
+  <th>DEPARTURE TIME</th>
+  <th>Arrival Airport</th>
+  <th>Departure Airport</th>
+  <th>Arrival Time</th>
+</tr>
+
+<tr>
+<td><%= flight.airline %></td>
+<td><%= flight.flightNumber %></td>
+<td><%= flight.departure %></td>
+<td><%=flight.arrivalAirport%></td>
+<td><%=flight.departureAirport%></td>
+<td><%=flight.arrival%></td>
+</tr>
+</table >
+<h1><%= id%></h1>
+<form action="/flights/<%= id %>/update?_method=PUT"
+  method="POST">
+    <label >Arrival Airport:<select name="arrivalAirport">
+      <option value="AUS">Austin</option>
+      <option value="DAL">Dallas</option>
+      <option value="LAX">Los Angeles</option>
+      <option value="SEA">Seattle</option>
+    </select></label ><br />
+
+    <label >Departure Airport:<select name="departureAirport">
+      <option value="AUS">Austin</option>
+      <option value="DAL">Dallas</option>
+      <option value="LAX">Los Angeles</option>
+      <option value="SEA">Seattle</option>
+    </select></label ><br />
+<h4>Arrival Time</h4>    
+<input type="datetime-local" id="meeting-time"
+       name="arrival">
+<br />
+
+<button type="submit">update flights </button>
+</form>
+
+
+  <%- include('./partials/footer') %>
