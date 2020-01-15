@@ -1,4 +1,5 @@
 const Flight = require("../models/flight");
+var Ticket = require('../models/ticket')
 
 const newFlight = (req, res) => {
   res.render("flights/new");
@@ -26,17 +27,24 @@ const edit = (req, res) => {
     });
   });
 };
+
 const show = (req, res) => {
-  Flight.findById(req.params.id, (err, flight) => {
-    res.render("flights/show", {
-      title: "flight Detail",
-      flight,
-      id: req.params.id
-    });
-  });
-};
+  Flight.findById(req.params.id)
+    .populate('ticket')
+    .exec((err, flight) => {
+      Ticket.find({ _id: { $nin: flight.ticket } }).exec((err, tickets) => {
+        res.render('flights/show', {
+          title: 'Flight Detail',
+          flight,
+          tickets,
+        })
+      })
+    })
+}
+
 
 const create = (req, res) => {
+   console.log(req.body)
   const flight = new Flight(req.body);
   flight.save(err => {
     if (err) return res.redirect("flights/new");
@@ -44,14 +52,16 @@ const create = (req, res) => {
   });
 };
 
-const deleteTodo = (req, res) => {
-  console.log(req.params.id)
-   Flight.findOneAndRemove({'_id': req.params.id})
+const deleteFlight = (req, res) => {
+   Flight.findOneAndDelete({'_id': req.params.id},(err, deletedItem) =>{
+
+   })
       res.redirect("/flights")
   }
   // )}
 
 const update = (req, res) => {
+  console.log(req.body)
     Flight.findByIdAndUpdate(req.params.id, req.body,{new:true}, (err, flight) => {
     if(err) return res.status(500).send(err);
 
@@ -66,5 +76,5 @@ module.exports = {
   show,
   edit,
   update,
-  delete: deleteTodo,
+  delete: deleteFlight,
 };

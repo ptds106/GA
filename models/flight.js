@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
-// optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema;
+
 const scheduleSchema = new Schema({
-  arrival: {
-    type: String,
-    default: ""
-  }
-});
+  arrival: {type: String,}
+  },
+  );
 
 const flightsSchema = new Schema({
   arrivalAirport: { type: String, enum: ['AUS', 'DAL', 'LAX','SEA']},
@@ -19,7 +17,8 @@ const flightsSchema = new Schema({
       return Number(new Date().getFullYear()) + 1;
     }
   },
-    arrival: {scheduleSchema}
+  arrival: {scheduleSchema} ,
+  ticket: [{type: Schema.Types.ObjectId, ref: 'Ticket'}]
 });
 
 module.exports = mongoose.model("Flight", flightsSchema);

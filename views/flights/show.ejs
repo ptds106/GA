@@ -9,21 +9,34 @@
         <th>Arrival Airport</th>
         <th>Departure Airport</th>
         <th>Arrival Time</th>
+        <th>Seat Available and price</th>
       </tr>
-        <tr>
+
         <td><%=flight.airline%></td>
         <td><%=flight.flightNumber%></td>
         <td><%=flight.departure%></td>
         <td><%=flight.arrivalAirport%></td>
         <td><%=flight.departureAirport%></td>
         <td><%=flight.arrival%></td>
-    </tr>
-      </table>
-</tr>
-</table>
+        <td>  <select>
+          <%- flight.ticket.map(p => ` <option value="${p}">${p.seat} $${p.price}</option>
+          ` ).join('')%>
+        </select>
 
+ </td>
+      </table>
+
+
+
+<form id="add-per-to-cast" action="/tickets/<%= flight._id%>" method="POST">
+  <select name="seats">
+    <%- tickets.map(p =>` <option value="${p._id}">${p.seat} ,  $${p.price}</option>
+    `).join('')%>
+  </select>
+  <button type="submit">Add to Flight</button>
+</form>
 </br>
-<form action="/flights/<%=id %>/edit">
-<button type="Edit">Edit </button>
+<form action="/flights/<%=flight._id%>/edit">
+<button type="Edit">Update ETA </button>
 </form>
   <%- include('./partials/footer') %>

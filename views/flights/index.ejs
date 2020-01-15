@@ -15,9 +15,9 @@
   <tr id="red">
     <td class = "delete">
       <form
-        action="/flights/<%=t._id%>/delete"
+        action="/flights/<%=t._id%>/delete?_method=DELETE"
         class="delete-form"
-        method="DELETE"
+        method="POST"
       >
         <button type="submit">X</button>
       </form>
